@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>index.html</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;800&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--violet:#4B1FD6;--ink:#2A1170;--paper:#FFFBF0;--coral:#FF5A5F;--sun:#FFC400;--mint:#00C9A7;--sky:#3D8BFF;--pink:#FF7AC6;
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;font-family:Nunito,"Trebuchet MS",sans-serif;font-weight:600;color:var(--ink);
+background:var(--violet) radial-gradient(circle at 1.5px 1.5px,rgba(255,255,255,.18) 1.5px,transparent 0) 0 0/22px 22px}
+h1,h2,h3,.rb{font-family:Rubik,"Arial Black",sans-serif;font-weight:800;margin:0}
+.wrap{max-width:980px;margin:0 auto;padding:16px}
+.logo{text-align:center;color:#fff;font-size:clamp(28px,6vw,52px);line-height:1.05;text-shadow:0 4px 0 var(--ink);transform:rotate(-1.5deg);margin:8px 0 4px}
+.logo small{display:block;font-size:.4em;color:var(--sun);text-shadow:none;margin-top:6px}
+.card{background:var(--paper);border:4px solid var(--ink);border-radius:26px;box-shadow:0 8px 0 var(--ink);padding:20px;margin:16px 0}
+.btn{font:800 18px Rubik,sans-serif;border:4px solid var(--ink);border-radius:999px;padding:12px 24px;background:var(--sun);color:var(--ink);cursor:pointer;box-shadow:0 5px 0 var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translateY(-2px) rotate(-1deg)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ink)}
+.btn.mint{background:var(--mint)}.btn.coral{background:var(--coral);color:#fff}.btn.ghost{background:#fff}.btn.sm{font-size:14px;padding:6px 14px;box-shadow:0 3px 0 var(--ink)}
+:focus-visible{outline:4px solid var(--pink);outline-offset:3px}
+input{font:800 17px Nunito,sans-serif;border:3px solid var(--ink);border-radius:14px;padding:9px 12px;width:100%;background:#fff;color:var(--ink)}
+.teams{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.team{border:4px solid var(--ink);border-radius:22px;padding:12px;background:var(--c);box-shadow:0 6px 0 var(--ink)}
+.team .em{font-size:44px;display:block;text-align:center}
+.team input{margin-top:6px;text-align:center}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.chip{background:var(--c);border:3px solid var(--ink);border-radius:999px;padding:6px 14px;font:800 15px Rubik,sans-serif;color:var(--ink);display:flex;gap:8px;align-items:center;box-shadow:0 3px 0 var(--ink)}
+.chip b{background:#fff;border-radius:999px;padding:0 9px;font-size:18px;min-width:34px;text-align:center}
+.chip.bump{animation:bump .6s}
+@keyframes bump{40%{transform:scale(1.3) rotate(-4deg)}}
+.round{margin:22px 0}
+.rhead{display:flex;align-items:center;gap:12px;color:#fff;margin-bottom:10px;flex-wrap:wrap}
+.rhead h2{font-size:clamp(20px,4vw,30px);text-shadow:0 3px 0 var(--ink)}
+.rhead span.pill{background:var(--ink);padding:4px 12px;border-radius:999px;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.tile{aspect-ratio:1.1;border:4px solid var(--ink);border-radius:24px;background:var(--c);box-shadow:0 7px 0 var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:800 18px Rubik,sans-serif;color:var(--ink);transition:transform .12s}
+.tile .ic{font-size:clamp(40px,8vw,60px);line-height:1}
+.tile:hover{transform:rotate(-3deg) scale(1.04)}
+.tile.done{filter:grayscale(1) opacity(.45);box-shadow:0 2px 0 var(--ink);transform:translateY(5px);cursor:default}
+.tile.big{grid-column:1/-1;aspect-ratio:auto;padding:26px;font-size:24px}
+.qtext{font:800 clamp(22px,4.5vw,34px)/1.25 Rubik,sans-serif;background:#fff;border:4px dashed var(--ink);border-radius:20px;padding:18px;margin:12px 0}
+.qtext.small{font-size:clamp(18px,3.4vw,24px)}
+.tag{display:inline-block;background:var(--c);border:3px solid var(--ink);border-radius:999px;padding:3px 14px;font:800 15px Rubik,sans-serif}
+.pick{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0}
+.pick button{background:var(--c);border:4px solid var(--ink);border-radius:20px;padding:14px;cursor:pointer;font:800 20px Rubik,sans-serif;color:var(--ink);box-shadow:0 5px 0 var(--ink)}
+.pick button:hover{transform:translateY(-3px) rotate(1deg)}
+.pick small{display:block;font:600 13px Nunito,sans-serif;margin-top:4px}
+.timer{display:grid;place-items:center;margin:10px auto;width:min(240px,60vw);aspect-ratio:1;border-radius:50%;border:5px solid var(--ink);
+background:conic-gradient(var(--tc,var(--mint)) calc(var(--p,1)*360deg),#fff 0);position:relative;box-shadow:0 7px 0 var(--ink)}
+.timer::after{content:"";position:absolute;inset:16%;background:var(--paper);border-radius:50%;border:4px solid var(--ink)}
+.timer span{position:relative;z-index:1;font:800 clamp(48px,14vw,80px) Rubik,sans-serif}
+.timer.hurry{animation:shake .4s infinite}
+@keyframes shake{25%{transform:rotate(-3deg)}75%{transform:rotate(3deg)}}
+.center{text-align:center}.row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.ref{background:#E7FFF8;border:4px solid var(--ink);border-radius:20px;padding:16px;margin:12px 0;animation:pop .35s}
+.ref h3{margin-bottom:6px}
+@keyframes pop{from{transform:scale(.8) rotate(-2deg);opacity:0}}
+.crit{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#fff;border:3px solid var(--ink);border-radius:16px;padding:8px 12px;margin:8px 0}
+.stars{display:flex;gap:6px}
+.stars button{width:46px;height:46px;border-radius:50%;border:3px solid var(--ink);background:#fff;font:800 20px Rubik,sans-serif;cursor:pointer;color:var(--ink)}
+.stars button.on{background:var(--sun);transform:scale(1.12)}
+.who{font-size:14px;opacity:.85}
+.cbx{display:flex;align-items:center;gap:10px;background:var(--c);border:4px solid var(--ink);border-radius:16px;padding:8px 14px;font:800 18px Rubik,sans-serif;color:var(--ink);cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.cbx .box{width:34px;height:34px;border:4px solid var(--ink);border-radius:10px;background:#fff;display:grid;place-items:center;font-size:24px}
+.cbx.on .box::after{content:"✓"}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.steps{display:flex;align-items:flex-end;justify-content:center;gap:8px;min-height:380px;margin:18px 0 8px;border-bottom:6px solid var(--ink)}
+.stp{flex:1;max-width:210px;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch}
+.stp .top{text-align:center;padding-bottom:6px;animation:drop .5s both;animation-delay:calc(var(--d) + .7s)}
+@keyframes drop{from{opacity:0;transform:translateY(-24px)}}
+.stp .crown{font-size:34px;height:42px}
+.stp .em{font-size:clamp(42px,10vw,76px);line-height:1;display:block}
+.stp .nm{font:800 14px Rubik,sans-serif;margin:4px 0;word-break:break-word}
+.stp .sc{display:inline-block;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:0 16px;font:800 24px Rubik,sans-serif}
+.stp .bar{background:var(--c);border:4px solid var(--ink);border-bottom:none;border-radius:20px 20px 0 0;height:var(--h);display:flex;justify-content:center;padding-top:8px;font:800 40px Rubik,sans-serif;color:var(--ink);transform-origin:bottom;animation:grow .9s cubic-bezier(.3,1.4,.5,1) both;animation-delay:var(--d)}
+@keyframes grow{from{transform:scaleY(0)}}
+.podium{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.pl{display:flex;align-items:center;gap:12px;background:var(--c);border:4px solid var(--ink);border-radius:20px;padding:10px 16px;font:800 22px Rubik,sans-serif;box-shadow:0 5px 0 var(--ink)}
+.pl .sc{margin-left:auto;background:#fff;border-radius:999px;padding:2px 16px}
+.pl:first-child{font-size:30px;transform:rotate(-1deg)}
+.fall{position:fixed;top:-40px;font-size:30px;pointer-events:none;animation:fall linear forwards;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.hint{color:#fff;text-align:center;font-size:14px;margin:4px 0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="logo">Педагогический баттл<small>Финальная игра · 4 команды · 3 раунда</small></h1>
+  <div id="app"></div>
+</div>
+<script>
+const TEAMS0=[{n:'Команда 1',e:'🦊',c:'#FF5A5F'},{n:'Команда 2',e:'🐸',c:'#00C9A7'},{n:'Команда 3',e:'🦄',c:'#FFC400'},{n:'Команда 4',e:'🐙',c:'#7FB4FF'}];
+const R=[
+{id:0,title:'Решение за минуту',ic:'⚡',c:'#FFC400',ans:60,intro:'Что сделает воспитатель? Решение — за минуту.',crit:[['Глубина и аргументация',3]],
+ items:[
+ {ic:'💧',q:`Ребёнок разлил воду и испугался. Что сделает воспитатель?`,ref:`Обеспечить безопасность, спокойно убрать воду, напомнить правила и вернуть к деятельности без публичного стыда.`},
+ {ic:'🔢',q:`Ребёнок называет числа до 10, но не может отсчитать 6 предметов. Как помочь?`,ref:`Предметный счёт с перекладыванием по одному, соотнесение числительного с предметом.`},
+ {ic:'🤐',q:`Ребёнок молчит, когда его просят рассказать историю перед всеми. Что делать?`,ref:`Не принуждать, предложить выбор: ответить на один вопрос, в паре, по картинкам или позже.`},
+ {ic:'🎨',q:`Ребёнок говорит: «У меня некрасиво, я не умею». Как поддержать?`,ref:`Признать чувство, отметить усилие, предложить небольшой шаг без сравнения с другими.`}]},
+{id:1,title:'Найди педагогическую ошибку',ic:'🔍',c:'#00C9A7',ans:60,intro:'Найдите скрытую ошибку в фразе воспитателя и поясните её.',crit:[['Найдена ошибка и дано пояснение',3]],
+ items:[
+ {ic:'🧪',q:`«Все обязаны получить одинаковый результат опыта!»`,ref:`Игнорирование наблюдений: нужно обсуждать фактический результат.`},
+ {ic:'🏁',q:`«Кто не решил пример первым, тот невнимательный!»`,ref:`Сравнение детей и оценка скорости вместо мышления.`},
+ {ic:'🗣️',q:`«Повтори слово правильно десять раз при всех!»`,ref:`Давление и риск речевой тревожности.`},
+ {ic:'🖍️',q:`«Раскрашиваем только по моему образцу, иначе неправильно!»`,ref:`Подавление творчества.`}]},
+{id:2,title:'Педагогический консилиум',ic:'🧠',c:'#FF7AC6',ans:180,intro:'Комплексный раунд. Предложите решение для всей ситуации.',
+ crit:[['Спокойная атмосфера',3],['Индивидуальные варианты для детей',3],['Корректное объяснение родителю',3]],
+ items:[{ic:'🎪',big:1,q:`Во время совместной деятельности один ребёнок быстро завершил задание и мешает другим, второй не справляется и начинает плакать, третий отказывается участвовать. Родитель, присутствующий на открытом мероприятии, спрашивает, почему дети работают по-разному.
+<br><br><b>Задание:</b> предложите комплексное решение — как обеспечить спокойную атмосферу, какие индивидуальные варианты предложить детям и как корректно объяснить ситуацию родителю.`,
+ ref:`<b>Атмосфера:</b> спокойный тон, напомнить общие правила, не обращать внимание группы на плачущего и отказавшегося.<br><b>Индивидуально:</b> быстрому — усложнённое или помощник; плачущему — поддержка, посильный маленький шаг; отказавшемуся — выбор роли или наблюдение, подключение позже без давления.<br><b>Родителю:</b> спокойно объяснить, что у детей разный темп и уровень, поэтому задания подбираются индивидуально; цель — успех каждого ребёнка.`}]}
+];
+let S;
+const $=s=>document.querySelector(s);
+function init(){S={teams:TEAMS0.map(t=>({...t,score:0,players:[]})),used:{},cur:null,view:'setup',t:null,paused:false};render()}
+const key=(r,i)=>r+'-'+i;
+function chips(bump){return `<div class="chips">${S.teams.map((t,i)=>`<div class="chip ${bump===i?'bump':''}" style="--c:${t.c}">${t.e} ${esc(t.n)} <b>${t.score}</b></div>`).join('')}</div>`}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function render(bump){
+  const a=$('#app');stopTimer();if(S.view!=='final')stopMusic();
+  if(S.view==='setup'){
+    a.innerHTML=`<div class="card"><h2>Кто играет?</h2><p>Задайте названия команд. Капитаны следят, чтобы отвечали разные участники.</p>
+    <div class="teams">${S.teams.map((t,i)=>`<div class="team" style="--c:${t.c}"><span class="em">${t.e}</span><input aria-label="Название команды ${i+1}" value="${esc(t.n)}" data-i="${i}"></div>`).join('')}</div>
+    <div class="row"><button class="btn mint" id="go">Начать баттл!</button></div></div>`;
+    a.querySelectorAll('input').forEach(inp=>inp.oninput=()=>S.teams[+inp.dataset.i].n=inp.value||'Команда');
+    $('#go').onclick=()=>{S.view='board';render()};
+  }else if(S.view==='board'){
+    a.innerHTML=chips(bump)+R.map(r=>`<div class="round"><div class="rhead"><h2>${r.ic} Раунд ${r.id+1}. ${r.title}</h2><span class="pill">${r.id===2?'до 5 баллов каждой команде':'до 3 баллов'}</span></div>
+    <div class="tiles">${r.items.map((it,i)=>`<button class="tile ${it.big?'big':''} ${S.used[key(r.id,i)]?'done':''}" style="--c:${r.c}" data-r="${r.id}" data-i="${i}" ${S.used[key(r.id,i)]?'disabled':''}><span class="ic">${it.ic}</span>${it.big?'Открыть ситуацию':'Задание '+(i+1)}</button>`).join('')}</div></div>`).join('')+
+    `<div class="row"><button class="btn coral" id="fin">Завершить игру 🏆</button></div>`;
+    a.querySelectorAll('.tile').forEach(b=>b.onclick=()=>{const rr=+b.dataset.r;S.cur={r:rr,i:+b.dataset.i,team:null,name:'',phase:rr===2?'r3':'team',pts:[],ck:[0,0,0,0],st:[0,0,0,0]};S.view='play';render();if(rr===2)runTimer(90,()=>{S.cur.phase='r3rate';play($('#app'))})});
+    $('#fin').onclick=()=>{S.view='final';render()};
+  }else if(S.view==='play')play(a);
+  else final(a);
+}
+function play(a){
+  const c=S.cur,r=R[c.r],it=r.items[c.i],T=c.team!=null?S.teams[c.team]:null;
+  let h=chips()+`<div class="card"><span class="tag" style="--c:${r.c}">${r.ic} Раунд ${r.id+1} · ${r.title}</span>`;
+  if(c.phase==='r3'||c.phase==='r3rate'){r3(a,h,r,it);return}
+  if(c.phase==='team'){
+    h+=`<h2 style="margin-top:12px">Кто отвечает?</h2><p>Выберите команду. Игрок должен быть новым — капитан следит за очерёдностью.</p>
+    <div class="pick">${S.teams.map((t,i)=>`<button style="--c:${t.c}" data-t="${i}">${t.e} ${esc(t.n)}<small>${t.players.length?'Уже отвечали: '+esc(t.players.join(', ')):'Ещё никто не отвечал'}</small></button>`).join('')}</div>
+    <label class="who">Имя отвечающего (по желанию)<input id="pn" placeholder="Например, Аня"></label>
+    <div class="row"><button class="btn ghost sm" id="back">← К заданиям</button></div></div>`;
+    a.innerHTML=h;
+    a.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{c.team=+b.dataset.t;c.name=$('#pn').value.trim();if(c.name)S.teams[c.team].players.push(c.name);c.phase='think';play(a);startThink()});
+    $('#back').onclick=()=>{S.view='board';render()};return;
+  }
+  h+=` <span class="tag" style="--c:${T.c}">${T.e} ${esc(T.n)}${c.name?' · '+esc(c.name):''}</span>
+  <p class="who" style="margin:10px 0 0">${r.intro}</p><div class="qtext ${it.big?'small':''}">${it.q}</div>`;
+  if(c.phase==='think'||c.phase==='answer'){
+    h+=`<div class="center"><h3>${c.phase==='think'?'🤔 Время подумать':'🎤 Говорите!'}</h3><div class="timer" id="tm"><span id="tn">0</span></div>
+    <div class="row"><button class="btn ghost sm" id="pz">⏸ Пауза</button>
+    ${c.phase==='think'?'<button class="btn mint" id="nx">Отвечаем сейчас</button>':'<button class="btn coral" id="chk">Проверка ✔</button>'}</div></div>`;
+  }
+  if(c.phase==='check'){
+    h+=`<div class="ref"><h3>✅ ${r.id===2?'Ориентир для оценки':'Правильный ответ'}</h3><div>${it.ref}</div></div>
+    <h3>Оценка комиссии</h3>${r.crit.map((cr,k)=>`<div class="crit"><span>${cr[0]}</span><div class="stars" data-k="${k}">${[0,1,2,3].map(v=>`<button data-v="${v}" class="${c.pts[k]===v?'on':''}">${v}</button>`).join('')}</div></div>`).join('')}
+    <div class="row"><button class="btn mint" id="sv">Записать баллы</button></div>`;
+  }
+  a.innerHTML=h+'</div>';
+  if(c.phase==='think'||c.phase==='answer'){
+    const th=c.phase==='think';
+    $('#pz').onclick=()=>{S.paused=!S.paused;$('#pz').textContent=S.paused?'▶ Дальше':'⏸ Пауза'};
+    if(th)$('#nx').onclick=()=>startAnswer();else $('#chk').onclick=()=>{stopTimer();c.phase='check';c.pts=r.crit.map(()=>0);play(a)};
+    if(S.t)paint();
+  }
+  if(c.phase==='check'){
+    a.querySelectorAll('.stars button').forEach(b=>b.onclick=()=>{const k=+b.parentNode.dataset.k;c.pts[k]=+b.dataset.v;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))});
+    $('#sv').onclick=()=>{const p=c.pts.reduce((x,y)=>x+y,0);S.teams[c.team].score+=p;S.used[key(c.r,c.i)]=1;S.view='board';const t=c.team;S.cur=null;render(t);if(p>=3)confetti(12)};
+  }
+}
+function r3(a,h,r,it){
+  const c=S.cur;
+  h+=`<p class="who" style="margin:10px 0 0">${r.intro}</p><div class="qtext small">${it.q}</div>`;
+  if(c.phase==='r3'){
+    h+=`<div class="center"><h3>⏱ Время на решение — 90 секунд</h3><div class="timer" id="tm"><span id="tn">0</span></div><div class="row"><button class="btn ghost sm" id="pz">⏸ Пауза</button><button class="btn coral" id="end">Время вышло</button></div></div></div>`;
+    a.innerHTML=h;
+    $('#pz').onclick=()=>{S.paused=!S.paused;$('#pz').textContent=S.paused?'▶ Дальше':'⏸ Пауза'};
+    $('#end').onclick=()=>{stopTimer();c.phase='r3rate';play(a)};
+    if(S.t)paint();return;
+  }
+  const left=S.teams.filter((t,i)=>!c.ck[i]||!c.st[i]).length,ok=left===0;
+  h+=`<div class="ref"><h3>✅ Ориентир для оценки</h3><div>${it.ref}</div></div><h3>Команды представили решения</h3><p class="who">Отметьте каждую команду галочкой и оцените её ответ от 1 до 5 звёзд.</p>`+
+  S.teams.map((t,i)=>`<div class="crit" style="background:${t.c}40"><button class="cbx ${c.ck[i]?'on':''}" style="--c:${t.c}" data-c="${i}" role="checkbox" aria-checked="${c.ck[i]?'true':'false'}"><span class="box"></span><span>${t.e} ${esc(t.n)}</span></button><div class="stars" data-s="${i}" aria-label="Оценка команды ${esc(t.n)}">${[1,2,3,4,5].map(v=>`<button data-v="${v}" class="${c.st[i]>=v?'on':''}" aria-label="${v} из 5">★</button>`).join('')}</div></div>`).join('')+
+  `<div class="row"><button class="btn mint" id="fn" ${ok?'':'disabled'}>Завершить игру 🏆</button></div>${ok?'':`<p class="who center">Осталось отметить и оценить команд: ${left}</p>`}</div>`;
+  a.innerHTML=h;
+  a.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{c.ck[+b.dataset.c]^=1;play(a)});
+  a.querySelectorAll('[data-s] button').forEach(b=>b.onclick=()=>{c.st[+b.parentNode.dataset.s]=+b.dataset.v;play(a)});
+  $('#fn').onclick=()=>{if(!ok)return;S.teams.forEach((t,i)=>t.score+=c.st[i]);S.used[key(2,0)]=1;S.cur=null;S.view='final';render()};
+}
+let iv,ac;
+function beep(f,d){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+let tk=0;
+function tick(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();tk^=1;const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;o.type='square';o.frequency.value=tk?1500:1000;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+.05);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.06)}catch(e){}}
+function stopTimer(){clearInterval(iv);S&&(S.t=null)}
+function runTimer(sec,onEnd){clearInterval(iv);S.paused=false;S.t={left:sec,total:sec};paint();
+  iv=setInterval(()=>{if(S.paused||!S.t)return;S.t.left--;if(S.t.left<=3&&S.t.left>0)beep(660,.12);else if(S.t.left>3)tick();if(S.t.left<=0){beep(300,.5);clearInterval(iv);paint();onEnd&&onEnd();return}paint()},1000)}
+function paint(){const tm=$('#tm');if(!tm||!S.t)return;const{left,total}=S.t;tm.style.setProperty('--p',left/total);
+  tm.style.setProperty('--tc',left<=5?'#FF5A5F':left/total<.5?'#FFC400':'#00C9A7');tm.classList.toggle('hurry',left<=5&&left>0);$('#tn').textContent=left}
+function startThink(){runTimer(15,()=>startAnswer())}
+function startAnswer(){const c=S.cur;if(!c)return;c.phase='answer';play($('#app'));runTimer(R[c.r].ans)}
+function final(a){
+  const s=[...S.teams].sort((x,y)=>y.score-x.score);
+  a.innerHTML=`<div class="card center"><h2>🏆 Победитель — ${s[0].e} ${esc(s[0].n)}!</h2><div class="steps">${s.map((t,i)=>`<div class="stp" style="--c:${t.c};--d:${(s.length-1-i)*.5}s"><div class="top"><div class="crown">${i===0?'👑':''}</div><span class="em">${t.e}</span><div class="nm">${esc(t.n)}</div><span class="sc">${t.score}</span></div><div class="bar" style="--h:${Math.round(60+t.score/Math.max(1,s[0].score)*200)}px">${i+1}</div></div>`).join('')}</div>
+  <div class="row"><button class="btn ghost" id="bk">← К заданиям</button><button class="btn mint" id="rs">Играть заново</button></div></div>`;
+  $('#bk').onclick=()=>{S.view='board';render()};$('#rs').onclick=init;
+  fanfare(true);setTimeout(()=>{if(S.view==='final')confetti(70)},3000);
+}
+function ctx(){ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();return ac}
+function note(f,d,type,g,at,dst){try{const A=ctx(),o=A.createOscillator(),k=A.createGain(),t=A.currentTime+at;o.type=type;o.frequency.value=f;k.gain.setValueAtTime(g,t);k.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(k);k.connect(dst||A.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+function pop(at){try{const A=ctx(),n=A.sampleRate*.08|0,b=A.createBuffer(1,n,A.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);const s=A.createBufferSource(),k=A.createGain();k.gain.value=.15;s.buffer=b;s.connect(k);k.connect(A.destination);s.start(A.currentTime+at)}catch(e){}}
+let mg;
+function stopMusic(){if(mg){try{mg.gain.value=0}catch(e){}mg=null}}
+function fanfare(big){
+ if(!big){note(784,.15,'triangle',.14,0);note(1047,.3,'triangle',.14,.12);return}
+ stopMusic();const A=ctx();mg=A.createGain();mg.gain.value=1;mg.connect(A.destination);
+ const run=(t,fs,h)=>fs.map((f,i)=>[f,t+i*.09,i===fs.length-1?h:.1]);
+ const M=[...run(0,[523,659,784,1047,1319,1568],.5),...run(1.05,[698,880,1047,1397,1760,2093],.5),...run(2.1,[784,988,1175,1568,1976,2349],.45),[1047,3.2,.1],[1047,3.35,.1],[1047,3.5,.1],[1319,3.7,.3],[1568,4.1,.3],[2093,4.5,1.3]];
+ const P=[[3.2,[262,330],.1],[3.35,[262,330],.1],[3.5,[262,330],.1],[4.5,[523,659,784],1.3]];
+ const B=[[131,0,.9],[87,1.05,.9],[98,2.1,.9],[131,3.2,.12],[131,3.35,.12],[131,3.5,.12],[131,4.5,1.3]];
+ M.forEach(([f,t,d])=>note(f,d+.1,'square',.07,t,mg));
+ P.forEach(([t,fs,d])=>fs.forEach(f=>note(f,d,'square',.035,t,mg)));
+ B.forEach(([f,t,d])=>note(f,d,'triangle',.22,t,mg));
+}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;
+ if(b.classList.contains('tile')){note(392,.1,'square',.08,0);note(587,.14,'square',.08,.08)}
+ else if(b.dataset.t!==undefined){note(523,.1,'triangle',.12,0);note(659,.1,'triangle',.12,.08);note(784,.18,'triangle',.12,.16)}
+ else if(b.parentNode.classList.contains('stars')){note(440+(+b.dataset.v)*110,.16,'triangle',.13,0)}
+ else if(b.classList.contains('cbx')){if(b.classList.contains('on'))note(300,.12,'sine',.15,0);else{note(700,.08,'sine',.15,0);note(1000,.12,'sine',.15,.07)}}
+ else if(b.id==='sv'||b.id==='fn'){note(659,.12,'triangle',.14,0);note(880,.12,'triangle',.14,.1);note(1175,.28,'triangle',.14,.2)}
+ else if(b.id==='chk'||b.id==='end'){note(880,.3,'sine',.14,0);note(1318,.4,'sine',.1,.12)}
+ else{note(600,.07,'square',.07,0);note(800,.08,'square',.07,.05)}
+});
+function confetti(n=40){if(n<=20)fanfare(false);const e=['🎉','⭐','🎈','✨','🍭','🌈'];for(let i=0;i<n;i++){const d=document.createElement('div');d.className='fall';d.textContent=e[i%e.length];d.style.left=Math.random()*100+'vw';d.style.animationDuration=(2+Math.random()*2.5)+'s';d.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),5500)}}
+init();
+</script>
+</body>
+</html>
